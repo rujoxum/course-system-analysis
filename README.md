@@ -82,12 +82,12 @@
 
 ---
 
-## 🗄️ 資料庫實體關聯模型與實作 (Database Implementation)
+## 🗄️ 第三正規化資料庫實體關聯與實作 (3NF Database Implementation)
 
-| 實體關聯模型設計 (ERD) | MS Access 第三正規化資料表關聯實作 |
-| :---: | :---: |
-| <img src="./docs/images/07_erd_diagram.png" width="420" alt="ERD圖" /> | <img width="1794" height="740" alt="MS Access 3NF 關聯圖" src="https://github.com/user-attachments/assets/da35e9f1-2314-42d8-9f5a-6d2284081f6f" /> |
-| 定義實體間之 1:N 與 M:N 解耦關係 | 消除 1:1 冗餘表，建立標準 $1 \to \infty$ 參照完整性約束 |
+<div align="center">
+  <img width="100%" alt="MS Access 3NF 關聯圖" src="https://github.com/user-attachments/assets/da35e9f1-2314-42d8-9f5a-6d2284081f6f" />
+  <p>▲ MS Access 第三正規化關聯實作（消除 1:1 冗餘表，建立標準 1 → ∞ 參照完整性約束）</p>
+</div>
 
 ---
 
