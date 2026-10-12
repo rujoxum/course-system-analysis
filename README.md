@@ -7,7 +7,7 @@
 
 > **課程專題**：系統分析與設計 (Systems Analysis and Design) ｜ **指導教授**：林娟娟 教授  
 > **專案小組成員**：廖冠筑、簡偉玲、洪語欣、洪于茜、盧恩佳  
-> **個人核心職責 (20.5%)**：初步調查報告 (PIR)、功能分解 (FDD)、環境圖 (Context Diagram)、評價評論系統完整規格 (Process 4 DFD/DD/Figma 原型)、課程查詢系統 (Process 5 DFD)、關聯資料庫架構重構與第三正規化實作 (3NF ERD / SNTL / Access 資料表)
+> **個人職責 (20.5%)**：初步調查報告 (PIR)、功能分解 (FDD)、環境圖 (Context Diagram)、評價評論系統完整規格 (Process 4 DFD/DD/Figma 原型)、課程查詢系統 (Process 5 DFD)、關聯資料庫架構重構與第三正規化實作 (3NF ERD / SNTL / Access 資料表)
 
 ---
 
@@ -22,64 +22,16 @@
 ## 🏛️ 系統全域架構與資料流程 (System Hierarchy & DFD)
 
 系統歷經需求調研、功能分解，繪製完整的 Context Diagram、Diagram 0 及 7 大子系統之階層式資料流程圖（DFD）：
+### 1. 系統資料流全貌圖 (External Entities & Core Sub-processes)
+<img width="957" height="373" alt="截圖 2026-10-12 下午4 57 01" src="https://github.com/user-attachments/assets/e7c73bdc-55bd-4f2f-bfb3-7e56f5da8b07" />
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#F0F9FF', 'edgeLabelBackground':'#FFFFFF', 'primaryBorderColor': '#0284C7', 'lineColor': '#0369A1'}}}%%
-flowchart TD
-    subgraph Entities ["👥 外部實體 (External Entities)"]
-        E1["🎓 學生端 (Student)"]
-        E2["👨‍🏫 教師端 (Faculty)"]
-        E3["🏫 校方行政後台 (Admin Console)"]
-        E4["📅 Google 行事曆 (External API)"]
-    end
+### 2. 系統與資料庫對照圖 (Sub-processes & Data Stores)
+<p align="center">
+<img width="760" height="529" alt="截圖 2026-10-12 下午4 58 05" src="https://github.com/user-attachments/assets/64f3ce05-e95c-4ed6-9ea5-a53b0616be7e" />
+</p>
 
-    subgraph Core ["🔄 SCUnirea 核心處理系統 (Sub-processes)"]
-        P1["1.0 權限管理系統<br/>(帳號驗證 · 名單批次匯入)"]
-        P2["2.0 課程管理系統<br/>(開課審核 · 資訊整合)"]
-        P3["3.0 課程資訊系統<br/>(公告發布 · 待辦事項清單)"]
-        P4["4.0 評價評論系統 ⭐<br/>(多維度評分 · 雙向回覆 · 官方隱蔽)"]
-        P5["5.0 課程查詢系統 ⭐<br/>(系級篩選 · 條件權重排序)"]
-        P6["6.0 修課規劃系統<br/>(願望清單 · 畢業學分計算)"]
-        P7["7.0 行事曆管理系統<br/>(排程生成 · Google Calendar 匯出)"]
-    end
 
-    subgraph Storage ["🗄️ 核心資料儲存 (Data Stores)"]
-        D1[("D1 使用者帳號庫")]
-        D2[("D2 學生修課紀錄")]
-        D3[("D3 課程資訊總表")]
-        D4[("D4 課程活動清單")]
-        D5[("D5 課程公告紀錄")]
-        D6[("D6 課程評價評論庫 ⭐")]
-        D7[("D7 課程收藏清單")]
-    end
-
-    E1 <--> P4 & P5 & P6 & P7 & P3
-    E2 <--> P2 & P3 & P4 & P7
-    E3 <--> P1 & P2 & P4 & P5
-    P7 --> E4
-
-    P1 --- D1 & D2
-    P2 --- D3
-    P3 --- D4 & D5
-    P4 --- D6
-    P5 --- D3 & D6
-    P6 --- D2 & D3 & D7
-    P7 --- D2 & D3 & D4
-
-    classDef entityBox fill:#E0F2FE,stroke:#0284C7,stroke-width:1.5px,color:#0C4A6E,rx:8px,ry:8px;
-    classDef processBox fill:#F8FAFC,stroke:#334155,stroke-width:1.5px,color:#0F172A,rx:8px,ry:8px;
-    classDef myProcess fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#78350F,rx:8px,ry:8px;
-    classDef storeBox fill:#F1F5F9,stroke:#64748B,stroke-width:1.5px,color:#1E293B,rx:6px,ry:6px;
-
-    class E1,E2,E3,E4 entityBox;
-    class P1,P2,P3,P6,P7 processBox;
-    class P4,P5 myProcess;
-    class D1,D2,D3,D4,D5,D6,D7 storeBox;
-```
-
----
-
-## 🛠️ 個人核心模組深鑽 (Individual Focus & Deliverables)
+## 🛠️ 個人核心模組與規格產出 (Individual Core Deliverables)
 
 ### 1. 評價評論子系統 (Process 4.0 Detailed DFD & Spec)
 * **多層級資料流切分**：展開至 Level-2 細部流程，包含 `4.1 匯入評價評論`、`4.2 條件篩選`、`4.3 查閱授權`、`4.4 多條件排序`、`4.5 教師實名回覆處理`、`4.6 編輯與刪除`、`4.7 官方不當言論隱蔽處置`。
